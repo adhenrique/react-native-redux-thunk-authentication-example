@@ -4,11 +4,22 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import LoginActions from './../actions/Login';
 
 class Login extends Component {
-    componentDidMount(){
-        this.props.login('meulogin', 'minhasenha');
+    constructor(props){
+        super(props);
+
+        this.state = {
+            user: null,
+            pass: null
+        }
+    }
+
+    doLogin(){
+        let { user, pass } = this.state;
+        this.props.login(user, pass);
     }
 
     render(){
+        let { hasError, isLogged } = this.props;
         return (
             <View style={styles.container}>
                 <Text>Esta é a pagina de login</Text>
@@ -20,6 +31,7 @@ class Login extends Component {
                         autoCapitalize={'none'}
                         underlineColorAndroid={'transparent'}
                         style={styles.input}
+                        onChangeText={(user) => this.setState({user})}
                     />
                     <TextInput
                         placeholder={'senha'}
@@ -28,12 +40,15 @@ class Login extends Component {
                         autoCapitalize={'none'}
                         underlineColorAndroid={'transparent'}
                         style={styles.input}
+                        onChangeText={(pass) => this.setState({pass})}
                     />
                 </View>
                 <Button
                     title={"Acessar"}
-                    onPress={ () => {} }
+                    onPress={ () => { this.doLogin() } }
                 />
+                <Text style={{marginTop: 20}}>{hasError ? "form com erro" : ""}</Text>
+                <Text style={{marginTop: 20}}>{isLogged ? "ONLINE" : "OFFLINE"}</Text>
             </View>
         )
     }
@@ -41,9 +56,9 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLogged: state.isLogged,
-        hasError : state.hasError,
-        isLoading: state.isLoading,
+        isLogged: state.login.isLogged,
+        hasError : state.login.hasError,
+        isLoading: state.login.isLoading,
     };
 };
 

@@ -26,7 +26,6 @@ class Root extends Component{
     render(){
         let { isLogged } = this.props.login;
         let { token } = this.state;
-        console.log(isLogged);
         return(
             <RouterWithRedux>
                 <Scene key='root'>
@@ -39,7 +38,6 @@ class Root extends Component{
                     />
                     <Scene
                         component={Main}
-                        initial={isLogged}
                         hideNavBar={true}
                         key='Main'
                         title='Main'

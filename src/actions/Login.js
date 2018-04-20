@@ -38,15 +38,27 @@ const login = (username, password) => {
             return;
         }
 
-        fetch('http://192.168.0.113:3001/users')
-            .then((res) => {
+        fetch('http://192.168.1.100:8080/api/user', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({username: username, password: password})
+        })
+            .then((res) => res.json())
+            .then(res => {
                 // cancela execução de call
                 dispatch(loginIsLoading(false));
 
-                console.log(res);
-                // return res;
+                // console.log(res);
+                if(res.connected){
+                    dispatch(loginHasError(false));
+                    dispatch(isLogged(true));
+                }
             })
-            .catch(() => {
+            .catch((e) => {
+                // console.warn(e);
                 dispatch(loginHasError(true));
             });
     }

@@ -14,15 +14,26 @@ export default (state = initialState, action) => {
 
     switch (type){
         case ActionTypes.IS_LOGGED:
-            return action.isLogged;
-        case ActionTypes.LOGIN_HAS_ERROR:
-            return action.loginHasError;
-        case ActionTypes.LOGIN_IS_LOADING:
-            return action.loginIsLoading;
+            // return action.isLogged;
+            // console.log('islogged', action);
 
-            // return Object.assign({}, state, {
-            //     isLoading: true,
-            // });
+            return Object.assign({}, state, {
+                isLogged: action.isLogged,
+            });
+        case ActionTypes.LOGIN_HAS_ERROR:
+            // return action.loginHasError;
+            // console.log('haserror', action);
+
+            return Object.assign({}, state, {
+                hasError: action.hasError,
+            });
+        case ActionTypes.LOGIN_IS_LOADING:
+            // return action.loginIsLoading;
+            // console.log('isloading', action);
+
+            return Object.assign({}, state, {
+                isLoading: action.isLoading,
+            });
         case ActionTypes.LOGIN:
             return Object.assign({}, state, {
                 isLogged: false,
