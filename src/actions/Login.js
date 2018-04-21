@@ -21,6 +21,10 @@ const loginIsLoading = (bool) => {
     }
 };
 
+const setAsyncStorage = () => {
+
+};
+
 const login = (username, password) => {
     // console.log('user', username);
     // console.log('pass', password);

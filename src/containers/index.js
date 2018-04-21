@@ -19,7 +19,7 @@ class Root extends Component{
 
     componentDidMount() {
         AsyncStorage.getItem('token').then((token) => {
-            // this.setState({ token: token !== null})
+            this.setState({ token: token !== null})
         });
     }
 
@@ -31,7 +31,7 @@ class Root extends Component{
                 <Scene key='root'>
                     <Scene
                         component={Login}
-                        initial={!isLogged}
+                        initial
                         hideNavBar={true}
                         key='Login'
                         title='Login'

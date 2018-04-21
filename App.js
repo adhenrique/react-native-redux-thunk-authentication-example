@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+    TextInput,
+    Button
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -23,36 +25,49 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+        <View style={styles.container}>
+            <Text>Esta é a pagina de login</Text>
+            <View>
+                <TextInput
+                    placeholder={'usuario'}
+                    placeholderTextColor={'rgba(54, 173, 164, .2)'}
+                    returnKeyType={'next'}
+                    autoCapitalize={'none'}
+                    underlineColorAndroid={'transparent'}
+                    onChangeText={(user) => {}}
+                />
+                <TextInput
+                    placeholder={'senha'}
+                    placeholderTextColor={'rgba(54, 173, 164, .2)'}
+                    returnKeyType={'next'}
+                    autoCapitalize={'none'}
+                    underlineColorAndroid={'transparent'}
+                    onChangeText={(pass) => {}}
+                />
+            </View>
+            <Button
+                title={"Acessar"}
+                onPress={ () => {} }
+            />
+        </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        padding: 20
+    },
+
+    input: {
+        marginBottom: 10,
+        borderBottomColor: '#36ada4',
+        borderBottomWidth: 1
+    },
+
+    button: {
+        padding: 10,
+        backgroundColor: '#36ada4'
+    }
 });
