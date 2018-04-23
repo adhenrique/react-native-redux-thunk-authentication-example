@@ -1,4 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
+import { Actions } from 'react-native-router-flux';
 
 const isLogged = (bool) => {
     return {
@@ -42,7 +43,7 @@ const login = (username, password) => {
             return;
         }
 
-        fetch('http://192.168.1.100:8080/api/user', {
+        fetch('http://192.168.0.115:8080/api/user', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -59,6 +60,7 @@ const login = (username, password) => {
                 if(res.connected){
                     dispatch(loginHasError(false));
                     dispatch(isLogged(true));
+                    Actions.Main();
                 }
             })
             .catch((e) => {
@@ -69,6 +71,7 @@ const login = (username, password) => {
 };
 
 const logout = () => {
+    Actions.Login();
     return {
         type: ActionTypes.LOGOUT
     }

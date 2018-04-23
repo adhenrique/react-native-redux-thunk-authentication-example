@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import LoginActions from './../actions/Login';
 
-export default class Main extends Component {
+ class Main extends Component {
     render(){
         return(
             <View style={styles.container}>
                 <Text>Essa é a página principal</Text>
                 <Button
-                    onPress={ () => {} }
+                    onPress={ () => { this.props.logout() } }
                     title={"Sair"}
                 />
             </View>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        isLogged: state.login.isLogged,
+        hasError : state.login.hasError,
+        isLoading: state.login.isLoading,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(LoginActions.logout())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
 const styles = StyleSheet.create({
     container: {
