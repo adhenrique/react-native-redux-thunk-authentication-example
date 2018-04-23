@@ -1,4 +1,4 @@
-# Redux + Redux Persist + Router Flux Example 
+# Redux + Redux Persist + Thunk + Router Flux Example 
 
 This project template was built with [react-native init](https://github.com/facebook/react-native).
 
