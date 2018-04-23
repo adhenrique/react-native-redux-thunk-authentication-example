@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, Scene } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { AsyncStorage, Text } from "react-native";
+import Loader from './../components/Loader';
 
 import Login from './../scenes/Login';
 import Main from '../scenes/Main';
@@ -13,38 +14,49 @@ class Root extends Component{
         super(props);
 
         this.state = {
-            token: null
+            token: null,
+            isStorageLoaded: false
         }
     }
 
     componentDidMount() {
         AsyncStorage.getItem('token').then((token) => {
-            this.setState({ token: token !== null})
+            this.setState({
+                token: token !== null,
+                isStorageLoaded: true
+            })
         });
     }
 
     render(){
         let { isLogged } = this.props.login;
-        let { token } = this.state;
-        return(
-            <RouterWithRedux>
-                <Scene key='root'>
-                    <Scene
-                        component={Login}
-                        initial
-                        hideNavBar={true}
-                        key='Login'
-                        title='Login'
-                    />
-                    <Scene
-                        component={Main}
-                        hideNavBar={true}
-                        key='Main'
-                        title='Main'
-                    />
-                </Scene>
-            </RouterWithRedux>
-        )
+        let { token, isStorageLoaded } = this.state;
+        if(!isStorageLoaded){
+            return (
+                <Loader loading={true} />
+            )
+        }else{
+            return(
+                <RouterWithRedux>
+                    <Scene key='root'>
+                        <Scene
+                            component={Login}
+                            initial={!token}
+                            hideNavBar={true}
+                            key='Login'
+                            title='Login'
+                        />
+                        <Scene
+                            component={Main}
+                            initial={token}
+                            hideNavBar={true}
+                            key='Main'
+                            title='Main'
+                        />
+                    </Scene>
+                </RouterWithRedux>
+            )
+        }
     }
 }
 

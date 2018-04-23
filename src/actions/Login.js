@@ -1,5 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import { Actions } from 'react-native-router-flux';
+import { AsyncStorage } from 'react-native';
 
 const isLogged = (bool) => {
     return {
@@ -60,6 +61,7 @@ const login = (username, password) => {
                 if(res.connected){
                     dispatch(loginHasError(false));
                     dispatch(isLogged(true));
+                    AsyncStorage.setItem('token', 'asdasdasd123'); // example
                     Actions.Main();
                 }
             })
@@ -71,6 +73,7 @@ const login = (username, password) => {
 };
 
 const logout = () => {
+    AsyncStorage.removeItem('token');
     Actions.Login();
     return {
         type: ActionTypes.LOGOUT
