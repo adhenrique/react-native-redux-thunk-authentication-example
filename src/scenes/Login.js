@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import LoginActions from './../actions/Login';
+import Loader from './../components/Loader';
 
 class Login extends Component {
     constructor(props){
@@ -19,9 +20,10 @@ class Login extends Component {
     }
 
     render(){
-        let { hasError, isLogged } = this.props;
+        let { hasError, isLogged, isLoading } = this.props;
         return (
             <View style={styles.container}>
+                <Loader loading={isLoading} />
                 <Text>Esta é a pagina de login</Text>
                 <View>
                     <TextInput
